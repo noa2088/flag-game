@@ -1,3 +1,5 @@
+import Screen
+
 SQUARE_WIDTH = 22
 SQUARE_HEIGHT = 22
 SCREEN_ROWS = 25
@@ -25,3 +27,5 @@ SNAKE = "snake.png"
 SOLDIER = "soldier.png"
 SOLDIER2 = "soldier2.png"
 SOLDIER_NIGHT = "soldier_night"
+INITIAL_POSITION_SOLDIER = Screen.screen.blit(SOLDIER, (0, 0))
+FLAG_POSITION = Screen.screen.blit(FLAG, (0, 0))
