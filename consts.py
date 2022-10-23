@@ -14,6 +14,8 @@ FLAG_WIDTH = 4 ###
 FLAG_HEIGHT = 4 ###
 SOLDIER_WIDTH = 2 ###
 SOLDIER_HEIGHT = 4 ###
+FONT_NAME = "Calibri"
+
 EXPLOSION = "explotion.png"
 FLAG = "flag.png"
 GRASS = "grass.png"
