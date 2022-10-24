@@ -50,7 +50,7 @@ def add_random_mines(xmax, ymax):
     for i in range(20):
         x = random.randint(0, xmax)
         y = random.randint(0, ymax)
-        while (x, y) in random_location_list or x % 22 != 0 or y % 22 != 0:
+        while (x, y) in random_location_list or x % 22 != 0 or y % 22 != 0 or is_mine_index_invalid(x, y):
             x = random.randint(0, xmax)
             y = random.randint(0, ymax)
         # Screen.screen.blit(mine, (x, y))
@@ -60,7 +60,13 @@ def add_random_mines(xmax, ymax):
 
 
 def is_mine_index_invalid(x, y):
-    if
+    if 1012 <= x <= 1100 and 462 <= y <= 528: #ADD NUMBERS TO CONSTS
+        return True
+    elif 0 <= x <= 88 and 0 <= y <= 88:
+        return True
+    return False
+
+
 def mines_indexes():
     random_location_list = add_random_mines(consts.SCREEN_WIDTH-consts.MINE_WIDTH,
                                             consts.SCREEN_HEIGHT-consts.MINE_HEIGHT)
