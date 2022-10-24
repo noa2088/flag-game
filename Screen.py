@@ -1,7 +1,5 @@
 import pygame
-
 import MineField
-
 import consts
 import random
 
