@@ -1,7 +1,6 @@
 import consts
 import pygame
 import random
-import Screen
 
 mine_field = []
 
@@ -16,11 +15,6 @@ def create_mine_field():
 
 create_mine_field()
 
-
-# for i in range(len(mine_field)):
-#     for j in range(len(mine_field[i])):
-#         print(mine_field[i][j], end=" ")
-#     print()
 
 def convert_position_to_index(position_x, position_y):  # הפונקציה מקבלת מיקום לפי פיקסלים
     index = [position_y / 22, position_x / 22]
@@ -53,31 +47,31 @@ def add_random_mines(xmax, ymax):
         while (x, y) in random_location_list or x % 22 != 0 or y % 22 != 0 or is_mine_index_invalid(x, y):
             x = random.randint(0, xmax)
             y = random.randint(0, ymax)
-        # Screen.screen.blit(mine, (x, y))
         random_location_list.append((x, y))
-        # pygame.display.flip()
     return random_location_list
 
 
 def is_mine_index_invalid(x, y):
-    if 1012 <= x <= 1100 and 462 <= y <= 528: #ADD NUMBERS TO CONSTS
+    if 1012 <= x <= 1100 and 462 <= y <= 528:  # CHANGE NUMBERS TO CONSTS
         return True
     elif 0 <= x <= 88 and 0 <= y <= 88:
         return True
     return False
 
 
-random_location_list = add_random_mines(consts.SCREEN_WIDTH-consts.MINE_WIDTH,
-                                            consts.SCREEN_HEIGHT-consts.MINE_HEIGHT)
+random_location_list = add_random_mines(consts.SCREEN_WIDTH - consts.MINE_WIDTH,
+                                        consts.SCREEN_HEIGHT - consts.MINE_HEIGHT)
+
 
 def mines_indexes():
     for location in random_location_list:
         mine_x = location[0]
         mine_y = location[1]
-        mine_index = convert_position_to_index(mine_x, mine_y) # gets the left top corner of mine
+        mine_index = convert_position_to_index(mine_x, mine_y)  # gets the left top corner of mine
         for i in range(int(mine_index[1]), int(mine_index[1] + 3)):
             mine_field[int(mine_index[0])][i] = consts.MINE_SQUARE
     return mine_field
+
 
 mines_indexes()
 
