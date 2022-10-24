@@ -67,9 +67,10 @@ def is_mine_index_invalid(x, y):
     return False
 
 
-def mines_indexes():
-    random_location_list = add_random_mines(consts.SCREEN_WIDTH-consts.MINE_WIDTH,
+random_location_list = add_random_mines(consts.SCREEN_WIDTH-consts.MINE_WIDTH,
                                             consts.SCREEN_HEIGHT-consts.MINE_HEIGHT)
+
+def mines_indexes():
     for location in random_location_list:
         mine_x = location[0]
         mine_y = location[1]
