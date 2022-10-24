@@ -36,7 +36,7 @@ MINE = "mine.png"
 SNAKE = "snake.png"
 SOLDIER = "soldier.png"
 SOLDIER2 = "soldier2.png"
-SOLDIER_NIGHT = "soldier_night"
+SOLDIER_NIGHT = "soldier_nigth.png"
 
 INITIAL_SOLDIER_POSITION = (0, 0)
 FLAG_POSITION = ((SCREEN_COLUMNS - FLAG_WIDTH) * SQUARE_WIDTH,
