@@ -1,5 +1,7 @@
 import pygame
-import Soldier
+
+import MineField
+import main
 import consts
 import random
 
@@ -31,11 +33,11 @@ def add_random_grass(xmax, ymax):
         pygame.display.flip()
 
 
-def draw_soldier():
+def draw_soldier(soldier_location):
     soldier = pygame.image.load(consts.SOLDIER)
     soldier = pygame.transform.scale(soldier, (consts.SOLDIER_WIDTH * consts.SQUARE_WIDTH,
                                                consts.SOLDIER_HEIGHT * consts.SQUARE_HEIGHT))
-    screen.blit(soldier, consts.INITIAL_SOLDIER_POSITION)
+    screen.blit(soldier, soldier_location)
 
 
 def draw_flag():
@@ -50,15 +52,39 @@ def draw_game():
     add_random_grass(consts.SCREEN_WIDTH-consts.GRASS_WIDTH, consts.SCREEN_HEIGHT-consts.GRASS_HEIGHT)
     draw_message(consts.INITIAL_TEXT_1, consts.WHITE, (90, 0))
     draw_message(consts.INITIAL_TEXT_2, consts.WHITE, (90, 20))
-    draw_soldier()
+    draw_soldier(consts.INITIAL_SOLDIER_POSITION)
     draw_flag()
     pygame.display.flip()
 
 
-def main():
-    draw_game()
-    while True:
-        soldier = pygame.image.load(consts.SOLDIER)
+def night_screen():
+    mine = pygame.image.load(consts.MINE)
+    mine = pygame.transform.scale(mine, (consts.MINE_WIDTH, consts.MINE_HEIGHT))
+    screen.fill(consts.BACKGROUND_NIGHT_COLOR)
+    draw_horizontal_lines()
+    draw_vertical_lines()
+    for random_location in MineField.random_location_list:
+        screen.blit(mine, random_location)
+    pygame.display.flip()
 
 
-main()
+def draw_vertical_lines():
+    for i in range(0, consts.SCREEN_HEIGHT,22):
+        pygame.draw.line(screen, consts.LINE_COLOR, (0, i), (consts.SCREEN_WIDTH, i))
+        pygame.display.flip()
+
+
+def draw_horizontal_lines():
+    for i in range(0, consts.SCREEN_WIDTH, 22):
+        pygame.draw.line(screen, consts.LINE_COLOR, (i, 0), (i, consts.SCREEN_HEIGHT))
+        pygame.display.flip()
+
+
+# def main():
+#     # draw_game()
+#     night_screen()
+#     while True:
+#         soldier = pygame.image.load(consts.SOLDIER)
+#
+#
+# main()
