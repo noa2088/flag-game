@@ -31,6 +31,19 @@ def add_random_grass(xmax, ymax):
         screen.blit(grass, (x, y))
         random_location_list.append((x, y))
         pygame.display.flip()
+    return random_location_list
+
+
+random_location_list = add_random_grass(consts.SCREEN_WIDTH - consts.GRASS_WIDTH,
+                                        consts.SCREEN_HEIGHT - consts.GRASS_HEIGHT)
+
+
+def grass_position():
+    grass = pygame.image.load(consts.GRASS)
+    grass = pygame.transform.scale(grass, (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
+    for grass_location in random_location_list:
+        screen.blit(grass, grass_location)
+        pygame.display.flip()
 
 
 def draw_soldier(soldier_location):
@@ -38,6 +51,7 @@ def draw_soldier(soldier_location):
     soldier = pygame.transform.scale(soldier, (consts.SOLDIER_WIDTH * consts.SQUARE_WIDTH,
                                                consts.SOLDIER_HEIGHT * consts.SQUARE_HEIGHT))
     screen.blit(soldier, soldier_location)
+    pygame.display.flip()
 
 
 def draw_flag():
@@ -49,7 +63,7 @@ def draw_flag():
 
 def draw_game(soldier_position):
     screen.fill(consts.BACKGROUND_COLOR)
-    add_random_grass(consts.SCREEN_WIDTH-consts.GRASS_WIDTH, consts.SCREEN_HEIGHT-consts.GRASS_HEIGHT)
+    # add_random_grass(consts.SCREEN_WIDTH-consts.GRASS_WIDTH, consts.SCREEN_HEIGHT-consts.GRASS_HEIGHT)
     draw_message(consts.INITIAL_TEXT_1, consts.WHITE, (90, 0))
     draw_message(consts.INITIAL_TEXT_2, consts.WHITE, (90, 20))
     draw_soldier(soldier_position)
@@ -69,7 +83,7 @@ def night_screen():
 
 
 def draw_vertical_lines():
-    for i in range(0, consts.SCREEN_HEIGHT,22):
+    for i in range(0, consts.SCREEN_HEIGHT, 22):
         pygame.draw.line(screen, consts.LINE_COLOR, (0, i), (consts.SCREEN_WIDTH, i))
         pygame.display.flip()
 
@@ -78,7 +92,6 @@ def draw_horizontal_lines():
     for i in range(0, consts.SCREEN_WIDTH, 22):
         pygame.draw.line(screen, consts.LINE_COLOR, (i, 0), (i, consts.SCREEN_HEIGHT))
         pygame.display.flip()
-
 
 # def main():
 #     # draw_game()
