@@ -75,7 +75,10 @@ def mines_indexes():
 
 mines_indexes()
 
-for i in range(len(mine_field)):
-    for j in range(len(mine_field[i])):
-        print(mine_field[i][j], end=" ")
-    print()
+
+# printing matrix
+
+# for i in range(len(mine_field)):
+#     for j in range(len(mine_field[i])):
+#         print(mine_field[i][j], end=" ")
+#     print()
