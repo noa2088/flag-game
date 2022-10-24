@@ -1,6 +1,8 @@
 import pygame
 import Screen
+import Soldier
 import consts
+import MineField
 
 state = {"is window open": True, "soldier location": consts.INITIAL_SOLDIER_POSITION, "direction": None}
 
@@ -23,13 +25,18 @@ def main():
                     state["direction"] = consts.DOWN
                 elif event.key == pygame.K_KP_ENTER or pygame.K_RETURN:
                     Screen.night_screen()
+                    Soldier.soldier_in_night_background(state["soldier location"])
                     pygame.time.wait(1000)
                     Screen.draw_game(state["soldier location"])
                 Screen.draw_game(move_soldier(state["direction"]))
                 Screen.grass_position()
-                # Screen.draw_soldier(move_soldier(state["direction"]))
             elif event.type == pygame.QUIT:
                 state["is window open"] = False
+            if did_soldier_reach_the_flag():
+                Screen.draw_win_message()
+                state["is window open"] = False
+            elif did_soldier_reach_a_mine():
+                Screen.draw_lose_message()
 
 
 def move_soldier(direction):
@@ -58,30 +65,29 @@ def move_soldier(direction):
     return state["soldier location"]
 
 
-
-
-
-def did_soldier_reach_the_flag():
-    pass
+def current_soldier_position(current_position):
+    present_location = MineField.convert_position_to_index(current_position[0], current_position[1])
+    return present_location
 
 
 def did_soldier_reach_a_mine():
-    pass
+    for location in Soldier.soldier_legs(current_soldier_position(state["soldier location"])):
+        for i in range(len(MineField.mine_field)):
+            for j in range(len(MineField.mine_field[i])):
+                if i == location[0] and j == location[1]:
+                    if MineField.mine_field[i][j] == consts.MINE:
+                        return True
+    return False
 
 
-def draw_message(message, font_size, color, location):
-    font = pygame.font.SysFont(consts.FONT_NAME, font_size)
-    text_img = font.render(message, True, color)
-    Screen.screen.blit(text_img, location)
+def did_soldier_reach_the_flag():
+    for location in Soldier.Soldier_body(current_soldier_position(state["soldier location"])):
+        for i in range(len(MineField.mine_field)):
+            for j in range(len(MineField.mine_field[i])):
+                if i == location[0] and j == location[1]:
+                    if MineField.mine_field[i][j] == consts.FLAG:
+                        return True
+    return False
 
-
-def draw_lose_message():
-    draw_message(consts.LOSE_MESSAGE, consts.LOSE_FONT_SIZE,
-                 consts.LOSE_COLOR, consts.LOSE_LOCATION)
-
-
-def draw_win_message():
-    draw_message(consts.WIN_MESSAGE, consts.WIN_FONT_SIZE,
-                 consts.WIN_COLOR, consts.WIN_LOCATION)
 
 main()
