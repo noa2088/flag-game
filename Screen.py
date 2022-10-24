@@ -19,19 +19,19 @@ def draw_message(message, color, location):
 
 
 def add_random_grass(xmax, ymax):
-    random_location_list = []
+    random_locations_list = []
     grass = pygame.image.load(consts.GRASS)
     grass = pygame.transform.scale(grass, (consts.GRASS_WIDTH, consts.GRASS_HEIGHT))
     for i in range(20):
         x = random.randint(0, xmax)
         y = random.randint(0, ymax)
-        while (x, y) in random_location_list:
+        while (x, y) in random_locations_list:
             x = random.randint(0, xmax)
             y = random.randint(0, ymax)
         screen.blit(grass, (x, y))
-        random_location_list.append((x, y))
+        random_locations_list.append((x, y))
         pygame.display.flip()
-    return random_location_list
+    return random_locations_list
 
 
 random_location_list = add_random_grass(consts.SCREEN_WIDTH - consts.GRASS_WIDTH,
@@ -93,11 +93,19 @@ def draw_horizontal_lines():
         pygame.draw.line(screen, consts.LINE_COLOR, (i, 0), (i, consts.SCREEN_HEIGHT))
         pygame.display.flip()
 
-# def main():
-#     # draw_game()
-#     night_screen()
-#     while True:
-#         soldier = pygame.image.load(consts.SOLDIER)
-#
-#
-# main()
+
+def draw_ending_message(message, font_size, color, location):
+    font = pygame.font.SysFont(consts.FONT_NAME, font_size)
+    text_img = font.render(message, True, color)
+    screen.blit(text_img, location)
+    pygame.display.flip()
+
+
+def draw_lose_message():
+    draw_ending_message(consts.LOSE_MESSAGE, consts.LOSE_FONT_SIZE,
+                        consts.LOSE_COLOR, consts.LOSE_LOCATION)
+
+
+def draw_win_message():
+    draw_ending_message(consts.WIN_MESSAGE, consts.WIN_FONT_SIZE,
+                        consts.WIN_COLOR, consts.WIN_LOCATION)
