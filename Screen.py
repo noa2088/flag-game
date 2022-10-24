@@ -1,7 +1,7 @@
 import pygame
 
 import MineField
-import main
+
 import consts
 import random
 
@@ -47,12 +47,12 @@ def draw_flag():
     screen.blit(flag, consts.FLAG_POSITION)
 
 
-def draw_game():
+def draw_game(soldier_position):
     screen.fill(consts.BACKGROUND_COLOR)
     add_random_grass(consts.SCREEN_WIDTH-consts.GRASS_WIDTH, consts.SCREEN_HEIGHT-consts.GRASS_HEIGHT)
     draw_message(consts.INITIAL_TEXT_1, consts.WHITE, (90, 0))
     draw_message(consts.INITIAL_TEXT_2, consts.WHITE, (90, 20))
-    draw_soldier(consts.INITIAL_SOLDIER_POSITION)
+    draw_soldier(soldier_position)
     draw_flag()
     pygame.display.flip()
 
